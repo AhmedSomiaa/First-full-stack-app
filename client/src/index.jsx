@@ -1,27 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
-import $ from 'jquery'
-import List from './components/List.jsx'
 
 const App = () => {
-  const [items, setItems] = useState([])
+  const [recipes, setRecipes] = useState([])
   useEffect(() => {
-    $.ajax({
-      url: '/api/items',
-      success: (data) => {
-        console.log(data)
-        setItems(data)
-      },
-      error: (err) => {
-        console.log('err', err)
-      },
-    })
   }, [])
 
   return (
     <div>
-      <h1>Item List</h1>
-      <List items={items} />
+      <h1>recipes</h1>
     </div>
   )
 }
