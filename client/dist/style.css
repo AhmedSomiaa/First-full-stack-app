@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: "PT Serif", sans-serif;
     margin: 0px;
     font-size: 1.1em;
@@ -15,10 +15,10 @@ body {
   }
   .sign:hover {
     background-color: #4CAF50; /* Green */
-    color: white;
+    /* color: white;
     cursor: pointer;
-  }
-.nav {
+  } */
+/* .nav {
     background-color: blue;
     margin: 0px;
     padding: 10px;
@@ -35,4 +35,4 @@ body {
     font-family: "Francois One";
     color: #ffffff;
     cursor: pointer;
-  }
+  } */

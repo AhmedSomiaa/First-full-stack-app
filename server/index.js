@@ -4,7 +4,7 @@ const db = require('./database-mongo');
 const recipesController = require('./controllers/recipes')
 
 const app = express();
-const PORT = process.env.PORT || 3000
+const PORT = 3000
 
 
 app.use(express.json());
@@ -18,5 +18,5 @@ app.put("/recipes/:id", recipesController.updateRecipe);
 app.delete("/Recipes/:id", recipesController.deleteRecipe);
 
 app.listen(PORT, function () {
-  console.log("listening on port 3000!");
+  console.log(`listening on port ${PORT}!`);
 });
