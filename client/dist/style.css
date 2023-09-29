@@ -1,0 +1,38 @@
+body {
+    font-family: "PT Serif", sans-serif;
+    margin: 0px;
+    font-size: 1.1em;
+    background-image: url("../images/recipe.jpg");
+    height: 100%;
+  }
+  button {
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    font-family: "PT Serif", sans-serif;
+    color: #ecf0f1;
+    background-color: #e74c3c;
+  }
+  .sign:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    cursor: pointer;
+  }
+.nav {
+    background-color: blue;
+    margin: 0px;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: "lato";
+  }
+  .logo {
+    font-weight: bold;
+    font-size: 1.9em;
+    margin-right: auto;
+    margin-left: 10px;
+    font-family: "Francois One";
+    color: #ffffff;
+    cursor: pointer;
+  }
