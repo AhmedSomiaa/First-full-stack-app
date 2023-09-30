@@ -5,9 +5,9 @@ const RecipeItem = ({recipe, changeView}) => {
         changeView("recipeDetails", recipe)
     }
     return (
-        <div>
+        <div className="recipe-list-item">
             <h3 onClick={handleChange}>Title: {recipe.title}</h3>
-            <p>Description: {recipe.description.length > 20 ? recipe.description.substring(0,20) + "..." : recipe.description}</p>
+            <p>Description: {recipe.description.length > 150 ? recipe.description.substring(0,150) + "..." : recipe.description}</p>
         </div>
     )
 }

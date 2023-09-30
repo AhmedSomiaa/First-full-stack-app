@@ -5,11 +5,14 @@ import RecipeList from "./components/RecipeList"
 import RecipeDetails from "./components/RecipeDetails";
 import AddRecipe from "./components/AddRecipe"
 import Home from "./components/Home";
+import SignUp from "./components/SignUp";
+import SignIn from "./components/SignIn";
 
 const App = () => {
   const [view, setView] = useState("home");
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState({});
+  const [authenticated, setAuthenticated] = useState(false);
 
   const fetchRecipes = async () => {
     try {
@@ -21,6 +24,8 @@ const App = () => {
   };
 
   useEffect(() => {
+    const isAuthenticated = localStorage.getItem("authenticated") === "true";
+    setAuthenticated(isAuthenticated);
     fetchRecipes();
   }, []);
 
@@ -56,33 +61,63 @@ const App = () => {
     setView(option);
     setSelectedRecipe(recipe);
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem("authenticated");
+    setAuthenticated(false);
+    setView("home");
+  };
+
   const renderView = () => {
     if (view === "home") {
       return <Home />;
     } else if (view === "recipes") {
       return <RecipeList recipes={recipes} changeView={changeView}/>;
-    }else if (view === "recipeDetails") {
+    } else if (view === "recipeDetails") {
       return <RecipeDetails recipe={selectedRecipe} updateRecipe={updateRecipe} deleteRecipe={deleteRecipe}/>;
     } else if (view === "addRecipe") {
       return <AddRecipe addRecipe={addRecipe}/>;
-
-  };
+    } else if (view === "signup") {
+      return <SignUp changeView={changeView}/>;
+    } else if (view === "signin") {
+      return <SignIn changeView={changeView} setAuthenticated={setAuthenticated}/>;
+    };
 };
     return (
       <div>
-        <header>
-          <nav>
-            <button onClick={() => changeView('home')}>Home</button>
-            <button onClick={() => changeView('recipes')}>Recipe List</button>
-            <button onClick={() => changeView('addRecipe')}>Create Recipe</button>
+          <nav className="nav">
+          {authenticated ? (
+            <>
+            <div className="logo">
+            <h1 onClick={() => changeView('home')}>Home</h1>
+            </div>
+            <div id="mainListDiv" className="main_list">
+            <ul className="navlinks">
+              <li onClick={() => setView("recipes")}>Recipe List</li>
+              <li onClick={() => setView("addRecipe")}>Create Recipe</li>
+              <li onClick={handleLogout}>Logout</li>
+            </ul>
+            </div>
+            </>
+          ) : (
+            <>
+            <div className="logo">
+              <h1 onClick={() => changeView('home')}>Home</h1>
+            </div>
+            <div id="mainListDiv" className="main_list">
+            <ul className="navlinks">
+              <li onClick={() => setView("signin")}>SignIn</li>
+              <li onClick={() => setView("signup")}>SignUp</li>
+            </ul>
+            </div>
+            </>
+          )}
           </nav>
-        </header>
         <main>
           {renderView()}
         </main>
       </div>
     );
-  ;
 };
 
 ReactDOM.render(<App />, document.getElementById('app'));

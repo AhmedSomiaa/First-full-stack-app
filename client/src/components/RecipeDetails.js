@@ -13,8 +13,8 @@ const RecipeDetails = ({recipe, updateRecipe, deleteRecipe}) => {
         <div className='recipe-details'>
             <h2>Title: {recipe.title}</h2>
             <p>Description: {recipe.description}</p>
-            <button onClick={toggleUpdateForm}>Update</button>
-            <button onClick={handleClick}>Delete</button>
+            <button className='update-button' onClick={toggleUpdateForm}>Update</button>
+            <button className='delete-button' onClick={handleClick}>Delete</button>
 
             {toggleUpdate && (
                 <UpdateRecipe recipe={recipe} updateRecipe={updateRecipe}/>

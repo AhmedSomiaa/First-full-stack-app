@@ -15,12 +15,12 @@ const EditPokemon = ({recipe, updateRecipe}) => {
         updateRecipe(recipe._id, updatedRecipe);
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <form className='update-form' onSubmit={handleSubmit}>
             <label htmlFor="title"> Title:</label>
             <input type="text" name="title" defaultValue={recipe.title} onChange={handleChange} required/> <br></br>
             <label htmlFor="description"> Description:</label>
             <input type="text" name="description" defaultValue={recipe.description} onChange={handleChange} required/> <br></br>
-            <input type ="submit" />
+            <input type ="submit" className="submit-button"/>
         </form>
     )
 };

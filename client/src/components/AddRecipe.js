@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddPokemon = ({addRecipe}) => {
+const AddRecipe = ({addRecipe}) => {
     const [addedRecipe, setAddedRecipe] = useState ({})
     const handleChange = (e) => {
         const inputName = e.target.name;
@@ -12,16 +12,16 @@ const AddPokemon = ({addRecipe}) => {
         addRecipe(addedRecipe);
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="add-recipe-form">
             <label htmlFor="title"> Title:</label>
             <input type="text" name="title" onChange={handleChange} required/> <br></br>
             <label htmlFor="number"> Descirption:</label>
             <input type="text" name="description" onChange={handleChange} required/> <br></br>
-            <input type ="submit" />
+            <input type ="submit" className="submit-button"/>
         </form>
     )
 
 }
 
 
-export default AddPokemon;
+export default AddRecipe;

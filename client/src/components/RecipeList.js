@@ -1,7 +1,7 @@
 import React from "react";
 import RecipeItem from "./RecipeItem"
 
-const Pokedex = ({recipes, changeView }) => (
+const RecipeList = ({recipes, changeView }) => (
   <div>
     <ul className="recipes-list">
       {recipes.map(recipe => (      
@@ -11,4 +11,4 @@ const Pokedex = ({recipes, changeView }) => (
   </div>
 );
 
-export default Pokedex;
+export default RecipeList;
