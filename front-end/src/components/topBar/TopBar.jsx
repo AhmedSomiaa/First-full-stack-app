@@ -4,7 +4,7 @@ import { useState } from "react";
 import logo from "../../images/logo.png";
 
 export default function TopBar() {
-    const user = true;
+    const user = false;
     const [searchVisible, setSearchVisible] = useState(false);
     const [searchInput, setSearchInput] = useState("");
 
@@ -48,7 +48,7 @@ export default function TopBar() {
                                 </Link>
                             </li>
                             <li className="topListItem">
-                                <Link className="link" to="/addRecipe">
+                                <Link className="link" to="/addPage">
                                     ADD RECIPE
                                 </Link>
                             </li>
