@@ -1,0 +1,62 @@
+.recipeDetails {
+  flex: 9;
+}
+
+.recipeDetailsWrapper {
+  padding: 20px;
+  padding-right: 0;
+}
+
+.recipeDetailsImg {
+  width: 100%;
+  height: 300px;
+}
+
+.recipeDetailsTitle {
+  text-align: center;
+  margin: 10px;
+  font-size: 28px;
+  font-family: "Lora", sans-serif;
+}
+
+.recipeDetailsEdit {
+  float: right;
+  font-size: 16px;
+}
+
+.recipeDetailsIcon {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.recipeDetailsIcon:first-child {
+  color: teal;
+}
+.recipeDetailsIcon:last-child {
+  color: tomato;
+}
+
+.recipeDetailsInfo {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  color: #be9656;
+  font-family: "Varela Round", Arial, Helvetica, sans-serif;
+}
+
+.recipeDetailsAuthor {
+  margin-left: 5px;
+}
+
+.recipeDetailsDesc {
+  color: #666;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.recipeDetailsDesc::first-letter {
+  margin-left: 20px;
+  font-size: 30px;
+  font-weight: 600;
+}
