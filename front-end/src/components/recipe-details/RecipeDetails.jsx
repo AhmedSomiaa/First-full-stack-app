@@ -1,17 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./recipeDetails.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function RecipeDetails() {
+    const location = useLocation();
+    const path = location.pathname.split("/")[2];
+    const [recipe, setRecipe] = useState({})
+
+    useEffect(() => {
+        const fetchRecipe = async () => {
+            const { data } = await axios.get("http://localhost:3000/recipes/2/" + path)
+            setRecipe(data)
+        }
+        fetchRecipe();
+    }, [path])
     return (
         <div className="recipeDetails">
             <div className="recipeDetailsWrapper">
-                <img
-                    className="recipeDetailsImg"
-                    src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                    alt=""
-                />
+                {recipe.image_path && (
+                    <img
+                        className="recipeDetailsImg"
+                        src={recipe.image_path}
+                        alt=""
+                    />
+                )}
                 <h1 className="recipeDetailsTitle">
-                    Title test
+                    {recipe.title}
                     <div className="recipeDetailsEdit">
                         <i className="recipeDetailsIcon far fa-edit"></i>
                         <i className="recipeDetailsIcon far fa-trash-alt"></i>
@@ -19,44 +34,13 @@ export default function RecipeDetails() {
                 </h1>
                 <div className="recipeDetailsInfo">
                     <span>
-                        Author:
                         <b className="recipeDetailsAuthor">
-                            <Link className="link" to="/posts?username=Ahmed">
-                                Ahmed
-                            </Link>
+                            Author: {recipe.author}
                         </b>
                     </span>
-                    <span>1 day ago</span>
                 </div>
                 <p className="recipeDetailsDesc">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-                    quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-                    Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-                    eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-                    error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-                    impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-                    odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-                    elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-                    iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-                    a odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-                    elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-                    iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-                    a odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-                    elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-                    iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-                    a odit modi eos!
-                    <br />
-                    <br />
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
-                    quibusdam ipsa quis quidem doloribus eos, dolore ea iusto impedit!
-                    Voluptatum necessitatibus eum beatae, adipisci voluptas a odit modi
-                    eos! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-                    error quibusdam ipsa quis quidem doloribus eos, dolore ea iusto
-                    impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas a
-                    odit modi eos! Lorem, ipsum dolor sit amet consectetur adipisicing
-                    elit. Iste error quibusdam ipsa quis quidem doloribus eos, dolore ea
-                    iusto impedit! Voluptatum necessitatibus eum beatae, adipisci voluptas
-                    a odit modi eos! Lorem, ipsum dolor sit amet consectetur.
+                    {recipe.description}
                 </p>
             </div>
         </div>

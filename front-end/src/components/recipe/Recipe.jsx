@@ -1,27 +1,24 @@
 import { Link } from "react-router-dom";
 import "./recipe.css";
 
-export default function Recipe({ img }) {
+export default function Recipe({ recipe }) {
     return (
         <div className="recipe">
             <img
                 className="recipeImg"
-                src={img}
+                src={recipe.image_path}
                 alt=""
             />
             <div className="recipeInfo">
                 <span className="recipeTitle">
-                    <Link to="/recipe/abc" className="link">
-                        Lorem ipsum dolor sit amet
+                    <Link to={`/recipe/${recipe.id}`} className="link">
+                        {recipe.title}
                     </Link>
                 </span>
                 <hr />
             </div>
             <p className="recipeDesc">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
-                officia architecto deserunt deleniti? Labore ipsum aspernatur magnam
-                fugiat, reprehenderit praesentium blanditiis quos cupiditate ratione
-                atque, exercitationem quibusdam, reiciendis odio laboriosam?
+                {recipe.description}
             </p>
         </div>
     );

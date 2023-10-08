@@ -56,11 +56,12 @@ module.exports = {
   updateRecipe: async (req, res) => {
     const userId = req.params.userId;
     const recipeId = req.params.recipeId;
-    const { title, description } = req.body;
+    const { title, description, image_path } = req.body;
     try {
       const result = await recipesModel.updateRecipe(userId, recipeId, {
         title,
         description,
+        image_path,
       });
       if (result.affectedRows === 0) {
         res

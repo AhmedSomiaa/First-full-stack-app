@@ -4,7 +4,7 @@ import { useState } from "react";
 import logo from "../../images/logo.png";
 
 export default function TopBar() {
-    const user = true;
+    const user = false;
     const [searchVisible, setSearchVisible] = useState(false);
     const [searchInput, setSearchInput] = useState("");
 
