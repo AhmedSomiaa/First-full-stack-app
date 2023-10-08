@@ -3,49 +3,53 @@ const recipesModel = require("../database/models/recipes.js");
 module.exports = {
   getAllRecipes: async (req, res) => {
     try {
-      const recipes = await recipesModel.getAll();
+      const [recipes] = await recipesModel.getAll();
       res.json(recipes);
     } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
+      console.log(error);
+      res.status(500).json("Internal Server Error");
     }
   },
 
   getRecipesByUser: async (req, res) => {
     const userId = req.params.userId;
     try {
-      const recipes = await recipesModel.getRecipesByUserId(userId);
+      const [recipes] = await recipesModel.getRecipesByUserId(userId);
       res.json(recipes);
     } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
+      console.log(error);
+      res.status(500).json("Internal Server Error");
     }
   },
 
   getRecipeById: async (req, res) => {
+    const authorId = req.params.userId;
     const recipeId = req.params.recipeId;
     try {
-      const recipe = await recipesModel.getOneRecipe(recipeId);
+      const [recipe] = await recipesModel.getOneRecipe(authorId, recipeId);
       if (recipe.length === 0) {
-        res.status(404).json({ error: "Recipe not found" });
+        res.status(404).json("Recipe not found");
       } else {
         res.json(recipe[0]);
       }
     } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
+      console.log(error);
+      res.status(500).json("Internal Server Error");
     }
   },
 
   addRecipe: async (req, res) => {
-    const { id, authorId, title, description } = req.body;
+    const userId = req.params.userId;
+    const { title, description } = req.body;
     try {
       const result = await recipesModel.addRecipe({
-        id,
-        authorId,
+        authorId: userId,
         title,
         description,
       });
       res.status(201).json(result);
     } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json("Internal Server Error");
     }
   },
 
@@ -59,14 +63,14 @@ module.exports = {
         description,
       });
       if (result.affectedRows === 0) {
-        res.status(404).json({
-          error: "Recipe not found or you don't have permission to update",
-        });
+        res
+          .status(404)
+          .json("Recipe not found or you don't have permission to update");
       } else {
-        res.json({ message: "Recipe updated successfully" });
+        res.json("Recipe updated successfully");
       }
     } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json("Internal Server Error");
     }
   },
 
@@ -80,10 +84,10 @@ module.exports = {
           error: "Recipe not found or you don't have permission to delete",
         });
       } else {
-        res.json({ message: "Recipe deleted successfully" });
+        res.json("Recipe deleted successfully");
       }
     } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json("Internal Server Error");
     }
   },
 };

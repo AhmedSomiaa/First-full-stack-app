@@ -15,4 +15,14 @@ module.exports = {
     const sql = "INSERT INTO `users` SET ?";
     return conn.query(sql, user);
   },
+
+  getUserByEmail: function (email) {
+    const sql = "SELECT email FROM `users` WHERE `email` = ?";
+    return conn.query(sql, email);
+  },
+
+  getUserByUsername: function (username) {
+    const sql = "SELECT username FROM `users` WHERE `username` = ?";
+    return conn.query(sql, username);
+  },
 };

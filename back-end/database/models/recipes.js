@@ -2,29 +2,29 @@ const conn = require("../index");
 
 module.exports = {
   getAll: function () {
-    const sql = `SELECT r.id, r.title, r.description, r.image_path, r.created_at, r.updated_at, u.username AS author 
+    const sql = `SELECT r.id, r.title, r.description, r.image_path, u.username AS author 
     FROM recipes r
     INNER JOIN users u ON r.authorId = u.id;
     `;
     return conn.query(sql);
   },
 
-  getRecipesByUserId: function () {
+  getRecipesByUserId: function (authorId) {
     const sql = `
-    SELECT id, title, description,image_path, created_at, updated_at 
+    SELECT id, title, description, image_path 
     FROM recipes 
     WHERE authorId = ?;
     `;
-    return conn.query(sql);
+    return conn.query(sql, [authorId]);
   },
 
-  getOneRecipe: function (idrecipe) {
-    const sql = `SELECT r.id, r.title, r.description, r.image-path, r.createdAt, u.username as author 
+  getOneRecipe: function (authorId, idrecipe) {
+    const sql = `SELECT r.id, r.title, r.description, r.image_path, u.username as author 
     FROM recipes r 
-    INNER JOIN users u ON r.authorId = u.id 
+    INNER JOIN users u ON r.authorId = ? 
     WHERE r.id = ?
     `;
-    return conn.query(sql, idrecipe);
+    return conn.query(sql, [authorId, idrecipe]);
   },
 
   addRecipe: function (recipe) {

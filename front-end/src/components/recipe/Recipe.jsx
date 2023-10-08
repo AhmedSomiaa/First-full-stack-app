@@ -16,7 +16,6 @@ export default function Recipe({ img }) {
                     </Link>
                 </span>
                 <hr />
-                <span className="recipeDate">1 hour ago</span>
             </div>
             <p className="recipeDesc">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
