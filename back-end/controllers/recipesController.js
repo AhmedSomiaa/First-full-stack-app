@@ -23,10 +23,9 @@ module.exports = {
   },
 
   getRecipeById: async (req, res) => {
-    const authorId = req.params.userId;
     const recipeId = req.params.recipeId;
     try {
-      const [recipe] = await recipesModel.getOneRecipe(authorId, recipeId);
+      const [recipe] = await recipesModel.getOneRecipe(recipeId);
       if (recipe.length === 0) {
         res.status(404).json("Recipe not found");
       } else {
@@ -40,12 +39,13 @@ module.exports = {
 
   addRecipe: async (req, res) => {
     const userId = req.params.userId;
-    const { title, description } = req.body;
+    const { title, description, image_path } = req.body;
     try {
       const result = await recipesModel.addRecipe({
         authorId: userId,
         title,
         description,
+        image_path,
       });
       res.status(201).json(result);
     } catch (error) {
@@ -54,14 +54,12 @@ module.exports = {
   },
 
   updateRecipe: async (req, res) => {
-    const userId = req.params.userId;
     const recipeId = req.params.recipeId;
-    const { title, description, image_path } = req.body;
+    const { title, description } = req.body;
     try {
-      const result = await recipesModel.updateRecipe(userId, recipeId, {
+      const result = await recipesModel.updateRecipe(recipeId, {
         title,
         description,
-        image_path,
       });
       if (result.affectedRows === 0) {
         res
@@ -76,10 +74,9 @@ module.exports = {
   },
 
   deleteRecipe: async (req, res) => {
-    const userId = req.params.userId;
     const recipeId = req.params.recipeId;
     try {
-      const result = await recipesModel.deleteRecipe(userId, recipeId);
+      const result = await recipesModel.deleteRecipe(recipeId);
       if (result.affectedRows === 0) {
         res.status(404).json({
           error: "Recipe not found or you don't have permission to delete",

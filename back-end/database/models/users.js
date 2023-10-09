@@ -17,7 +17,8 @@ module.exports = {
   },
 
   getUserByEmail: function (email) {
-    const sql = "SELECT email FROM `users` WHERE `email` = ?";
+    const sql =
+      "SELECT id, username, email, password FROM `users` WHERE `email` = ?";
     return conn.query(sql, email);
   },
 

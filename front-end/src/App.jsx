@@ -10,6 +10,7 @@ import SingleRecipe from "./pages/single-recipe/SingleRecipe.jsx"
 import AddPage from "./pages/addpage/AddPage.jsx"
 import Login from './pages/login/Login.jsx';
 import Register from './pages/register/Register.jsx';
+import MyRecipes from './pages/myrecipes/MyRecipes.jsx'
 
 const Layout = () => {
   return (
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/addPage",
         element: <AddPage />,
+      },
+      {
+        path: "/myRecipes",
+        element: <MyRecipes />,
       },
     ],
   },

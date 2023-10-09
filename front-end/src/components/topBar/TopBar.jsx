@@ -1,12 +1,19 @@
 import "./topBar.css"
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../../images/logo.png";
 
 export default function TopBar() {
-    const user = false;
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [searchVisible, setSearchVisible] = useState(false);
     const [searchInput, setSearchInput] = useState("");
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
 
     const handleSearchClick = () => {
         setSearchVisible(!searchVisible);
@@ -14,6 +21,11 @@ export default function TopBar() {
 
     const handleInputChange = (e) => {
         setSearchInput(e.target.value);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
     };
     return (
         <div className="top">
@@ -40,7 +52,7 @@ export default function TopBar() {
 
             <div className="topRight">
                 <ul className="topList">
-                    {user ? (
+                    {isLoggedIn ? (
                         <>
                             <li className="topListItem">
                                 <Link className="link" to="/myRecipes">
@@ -53,17 +65,24 @@ export default function TopBar() {
                                 </Link>
                             </li>
                             <li className="topListItem">
-                                <Link className="link" to="/logout">
+                                <Link className="link" to="/" onClick={handleLogout}>
                                     LOGOUT
                                 </Link>
                             </li>
                         </>
                     ) : (
-                        <li className="topListItem">
-                            <Link className="link" to="/login">
-                                LOGIN
-                            </Link>
-                        </li>
+                        <>
+                            <li className="topListItem">
+                                <Link className="link" to="/login">
+                                    LOGIN
+                                </Link>
+                            </li>
+                            <li className="topListItem">
+                                <Link className="link" to="/register">
+                                    REGISTER
+                                </Link>
+                            </li>
+                        </>
                     )}
                 </ul>
             </div>

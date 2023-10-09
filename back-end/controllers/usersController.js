@@ -44,7 +44,6 @@ module.exports = {
         email,
         password: hashedPassword,
       });
-      console.log(result);
       res.status(201).json(result);
     } catch (error) {
       console.log(error);
@@ -54,20 +53,25 @@ module.exports = {
 
   login: async (req, res) => {
     const { email, password } = req.body;
-
+    let token = null;
     try {
-      const [userRows, fields] = await usersModel.getUserByEmail(email);
+      const [userRows] = await usersModel.getUserByEmail(email);
       if (userRows.length === 0) {
         return res.status(401).json({ error: "Invalid credentials" });
       }
-
       const user = userRows[0];
       const passwordMatch = await bcrypt.compare(password, user.password);
 
       if (passwordMatch) {
-        res.json({
-          user: { id: user.id, username: user.username, email: user.email },
-        });
+        console.log(user);
+        const token = jwt.sign(
+          { id: user.id, username: user.username },
+          process.env.JWT_SECRET_SIGNING_KEY,
+          {
+            expiresIn: "1d",
+          }
+        );
+        res.json({ token });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
       }
